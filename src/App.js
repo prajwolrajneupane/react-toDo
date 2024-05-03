@@ -8,7 +8,7 @@ function App() {
 const [allToDos,setToDos]=useState([]);
 const [newTitle,setTitle]=useState("");
 const [newDesp,setDesp]=useState("");
-
+const [completedTodos, setCompletedTodos] = useState ([]);
 
 //these two are the function created to change todo dekhi completed samma lai switch ko rupp ma use garauna 
 function changestateFalse(){
@@ -47,18 +47,33 @@ setToDos(updatedTodoArr);
 //k bujna paro ta vanda updateTodoArr le sabbai add gareko array content garxa ra harek choti teslai dekhauxa
 
 
-localStorage.setItem('todoList',JSON.stringify(updatedTodoArr))
+localStorage.setItem('just-A-Name',JSON.stringify(updatedTodoArr))
 // localStorage.setItem() is a method in the localStorage object, which allows you to store data in the browser's local storage. It takes two arguments: a key and a value. 
 //json.stringify le chai stringify gardai xa aako chij laii
 
 }
 
 useEffect(()=>{
-  let savedTodo=JSON.parse(localStorage.getItem('todoList'))
+  let savedTodo=JSON.parse(localStorage.getItem('just-A-Name'))
 if(savedTodo){
 setToDos(savedTodo)
 }
 },[])
+
+
+// delete garna
+
+function deleteWala(index){
+  let reducedTodo=[...allToDos];
+    reducedTodo.splice(index,1);
+    localStorage.setItem('just-A-Name',JSON.stringify(reducedTodo))
+    setToDos(reducedTodo);
+
+
+  }
+
+
+  
 
   return (
     <div className='App'>
@@ -98,8 +113,10 @@ setToDos(savedTodo)
 
         </div>
         <div className="todo-list">
+  
 
-          {allToDos.map((item,countGarniWala)=>{
+
+          {isCompScreen===false? allToDos.map((item,countGarniWala)=>{
             //map=loop, so item ra countGarniWala chai parameters vanam
           //item vanya chai current element being processed of allTodos
           // countGarniWala normally termed index is the current 
@@ -117,13 +134,16 @@ setToDos(savedTodo)
               </div>
        <div>
 
-        <MdDelete className='icon'/>
-        <FaFlagCheckered className='check-icon' />
+        <MdDelete className='icon' onClick={deleteWala} title='delete?'/>
+        <FaFlagCheckered className='check-icon' title='complete?'  />
        </div>
           </div>
 
             )
-          })}
+          })
+          :console.log("suii")
+          }
+
         </div>
 
       </div>

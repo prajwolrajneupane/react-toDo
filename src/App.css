@@ -138,6 +138,9 @@ margin-bottom: 10px;
 
 .check-icon{
   font-size: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+
   margin-bottom: 5px;
 
   margin-left: 10px;
@@ -145,5 +148,5 @@ margin-bottom: 10px;
 }
 
 .check-icon:hover{
-  color: rgb(0,230,122);
+  color: rgb(74, 255, 171);
 }
